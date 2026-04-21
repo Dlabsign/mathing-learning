@@ -1,0 +1,418 @@
+#profile-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    /* Ubah ke center untuk split screen */
+    justify-content: center;
+    padding: 100px 24px 40px;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Container Card Split */
+.profile-card {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 36px;
+    border: 2.5px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 32px rgba(180, 150, 255, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    padding: 40px;
+    max-width: 900px;
+    /* Diperlebar untuk layout Kiri-Kanan */
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    animation: cardIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.profile-split {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* PANEL KIRI: Sidebar Profil */
+.profile-sidebar {
+    border-right: 3px dashed #DDE8FF;
+    padding-right: 32px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-avatar-wrap {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #DDE8FF, #F0F4FF);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    box-shadow: 0 8px 20px rgba(42, 75, 176, 0.15), inset 0 4px 8px rgba(255, 255, 255, 0.8);
+    border: 4px solid #FFFFFF;
+    overflow: hidden;
+}
+
+.profile-avatar-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-name {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 24px;
+    color: #3D2C8D;
+    margin: 0 0 4px;
+    line-height: 1.2;
+}
+
+.profile-email {
+    font-size: 13px;
+    color: #7A6B8A;
+    font-weight: 600;
+    margin: 0 0 24px;
+    word-break: break-all;
+}
+
+/* Tab Navigasi Vertikal */
+.profile-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tab-btn {
+    width: 100%;
+    background: #F0F4FF;
+    color: #5A3FD8;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    padding: 14px 20px;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    box-shadow: 0 4px 0 #DDE8FF;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tab-btn:hover {
+    transform: translateY(-2px);
+    background: #E6EEFF;
+}
+
+.tab-btn.active {
+    background: linear-gradient(145deg, #7C5CFC, #5A3FD8);
+    color: #fff;
+    border-color: #5A3FD8;
+    box-shadow: 0 6px 0 #3E27A0, 0 8px 16px rgba(124, 92, 252, 0.25);
+    transform: translateY(-2px);
+}
+
+.tab-btn.active:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #3E27A0;
+}
+
+/* PANEL KANAN: Main Content */
+.profile-main {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Alert Messages */
+.profile-alert {
+    padding: 14px;
+    border-radius: 16px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+
+.alert-success {
+    background: #D4F5E0;
+    color: #1A6B3C;
+    border: 2px solid #A0EABD;
+}
+
+.alert-error {
+    background: #FFD6EC;
+    color: #A0005A;
+    border: 2px solid #FFB3E6;
+}
+
+/* Konten Riwayat */
+.history-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: #3D2C8D;
+    margin: 0 0 20px;
+}
+
+.history-empty {
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px dashed #DDE8FF;
+    border-radius: 24px;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.history-list {
+    max-height: 380px;
+    /* Batasi tinggi agar bisa di-scroll */
+    overflow-y: auto;
+    padding-right: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Custom Scrollbar untuk riwayat */
+.history-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.history-list::-webkit-scrollbar-track {
+    background: #F0F4FF;
+    border-radius: 10px;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+    background: #B8CDFF;
+    border-radius: 10px;
+}
+
+.history-list::-webkit-scrollbar-thumb:hover {
+    background: #7C5CFC;
+}
+
+.history-card {
+    background: #FFFFFF;
+    border: 2px solid #DDE8FF;
+    border-radius: 20px;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+.history-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+}
+
+.history-type {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    color: #3D2C8D;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.history-detail {
+    font-size: 13px;
+    color: #7A6B8A;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.history-score {
+    padding: 8px 16px;
+    border-radius: 14px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+}
+
+.score-good {
+    background: #D4F5E0;
+    color: #16a34a;
+}
+
+.score-avg {
+    background: #FFE8CC;
+    color: #d97706;
+}
+
+/* Form Inputs */
+.field-group {
+    margin-bottom: 20px;
+}
+
+.field-label {
+    display: block;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    color: #5A3FD8;
+    margin-bottom: 8px;
+    margin-left: 4px;
+}
+
+.field-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 18px;
+    border-radius: 18px;
+    border: 2px solid #DDE8FF;
+    background: #FAFCFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: #3D2C8D;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.field-input:focus {
+    border-color: #7C5CFC;
+    box-shadow: 0 0 0 4px rgba(124, 92, 252, 0.15);
+}
+
+/* Avatar Picker */
+.avatar-picker-grid {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.avatar-option {
+    background: rgba(255, 255, 255, 0.6);
+    border: 4px solid transparent;
+    border-radius: 24px;
+    padding: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.avatar-option img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin-bottom: 8px;
+}
+
+.avatar-option p {
+    font-size: 13px;
+    font-weight: 700;
+    color: #7A6B8A;
+    margin: 0;
+}
+
+.avatar-option.selected {
+    background: #F0F4FF;
+    border-color: #7C5CFC;
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(124, 92, 252, 0.15);
+}
+
+/* Buttons */
+.btn-submit {
+    width: 100%;
+    background: linear-gradient(145deg, #7C5CFC, #5A3FD8);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    padding: 16px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #3E27A0, 0 10px 20px rgba(124, 92, 252, 0.3);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    margin-top: 8px;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 0 #3E27A0, 0 14px 24px rgba(124, 92, 252, 0.35);
+}
+
+.btn-submit:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #3E27A0;
+}
+
+.btn-back {
+    width: 100%;
+    background: #FFFFFF;
+    color: #4A3E5D;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    padding: 14px;
+    border-radius: 20px;
+    border: 2px solid #DDE8FF;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #DDE8FF;
+    transition: all 0.12s ease;
+    margin-top: auto;
+}
+
+.btn-back:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #DDE8FF;
+}
+
+.btn-back:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #DDE8FF;
+}
+
+/* Responsif untuk Layar Kecil (HP) */
+@media (max-width: 768px) {
+    #profile-screen {
+        padding-top: 80px;
+        align-items: flex-start;
+    }
+
+    .profile-split {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .profile-sidebar {
+        border-right: none;
+        border-bottom: 3px dashed #DDE8FF;
+        padding-right: 0;
+        padding-bottom: 24px;
+    }
+
+    /* Kembalikan tab jadi horizontal dan bisa di-scroll di HP */
+    .profile-tabs {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+
+    .profile-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tab-btn {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .btn-back {
+        margin-top: 24px;
+    }
+
+    .avatar-picker-grid {
+        justify-content: center;
+    }
+}
